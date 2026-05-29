@@ -7,7 +7,7 @@ public class Timetable {
     private /* как это хранить??? */ timetable;
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
-        //сохраняем занятие в расписании
+        s//сохраняем занятие в расписании
     }
 
     public /* непонятно, что возвращать */ getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
