@@ -37,7 +37,7 @@ public class Timetable {
         TreeMap<TimeOfDay, List<TrainingSession>> trainingsOfDay = timetable.get(dayOfWeek);
         if (trainingsOfDay == null) {
             return Collections.emptyList();
-        }//как реализовать, тоже непонятно, но сложность должна быть О(1)
+        }
 
         return trainingsOfDay.getOrDefault(timeOfDay, Collections.emptyList());
     }
