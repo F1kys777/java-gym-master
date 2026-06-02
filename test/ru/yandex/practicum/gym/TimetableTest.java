@@ -203,9 +203,9 @@ public class TimetableTest {
         timetable.addNewTrainingSession(session1);
         timetable.addNewTrainingSession(session2);
 
-        List<Map.Entry<Coach, Integer>> result = timetable.getCountByCoaches();
+        List<CounterOfTrainings> result = timetable.getCountByCoaches();
         assertEquals(1, result.size());
-        assertEquals(2, result.getFirst().getValue().intValue());
+        assertEquals(2, result.getFirst().getTrainingsCount());
     }
 
     @Test
@@ -231,14 +231,14 @@ public class TimetableTest {
         timetable.addNewTrainingSession(new TrainingSession(group, coachC, day3, time2));
         timetable.addNewTrainingSession(new TrainingSession(group, coachC, day3, time3));
 
-        List<Map.Entry<Coach, Integer>> result = timetable.getCountByCoaches();
+        List<CounterOfTrainings> result = timetable.getCountByCoaches();
         assertEquals(3, result.size());
-        assertEquals(3, result.get(0).getValue());
-        assertEquals(2, result.get(1).getValue());
-        assertEquals(1, result.get(2).getValue());
-        assertEquals(coachC, result.get(0).getKey());
-        assertEquals(coachB, result.get(1).getKey());
-        assertEquals(coachA, result.get(2).getKey());
+        assertEquals(3, result.get(0).getTrainingsCount());
+        assertEquals(2, result.get(1).getTrainingsCount());
+        assertEquals(1, result.get(2).getTrainingsCount());
+        assertEquals(coachC, result.get(0).getCoach());
+        assertEquals(coachB, result.get(1).getCoach());
+        assertEquals(coachA, result.get(2).getCoach());
     }
 
     @Test
@@ -257,13 +257,13 @@ public class TimetableTest {
         timetable.addNewTrainingSession(new TrainingSession(group, coachB, day2, time1));
         timetable.addNewTrainingSession(new TrainingSession(group, coachB, day2, time2));
 
-        List<Map.Entry<Coach, Integer>> result = timetable.getCountByCoaches();
+        List<CounterOfTrainings> result = timetable.getCountByCoaches();
         assertEquals(2, result.size());
-        assertEquals(2, result.get(0).getValue());
-        assertEquals(2, result.get(1).getValue());
+        assertEquals(2, result.get(0).getTrainingsCount());
+        assertEquals(2, result.get(1).getTrainingsCount());
 
-        Coach coach1 = result.get(0).getKey();
-        Coach coach2 = result.get(1).getKey();
+        Coach coach1 = result.get(0).getCoach();
+        Coach coach2 = result.get(1).getCoach();
         assertTrue((coach1.equals(coachA) && coach2.equals(coachB)) ||
                 (coach1.equals(coachB) && coach2.equals(coachA)));
     }

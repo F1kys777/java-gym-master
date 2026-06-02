@@ -42,10 +42,10 @@ public class Timetable {
         return trainingsOfDay.getOrDefault(timeOfDay, Collections.emptyList());
     }
 
-    public List<Map.Entry<Coach, Integer>> getCountByCoaches() {
-        Map<Coach, Integer> coachCounters = new HashMap<>();
+     public List<CounterOfTrainings> getCountByCoaches() {
+    Map<Coach, Integer> coachCounters = new HashMap<>();
 
-        for (TreeMap<TimeOfDay, List<TrainingSession>> trainingsOfDay : timetable.values()) {
+    for (TreeMap<TimeOfDay, List<TrainingSession>> trainingsOfDay : timetable.values()) {
             for (List<TrainingSession> trainingSessions : trainingsOfDay.values()) {
                 for (TrainingSession session : trainingSessions) {
                     Coach coach = session.getCoach();
@@ -54,16 +54,13 @@ public class Timetable {
             }
         }
 
-        List<Map.Entry<Coach, Integer>> result = new ArrayList<>(coachCounters.entrySet());
+    List<CounterOfTrainings> result = new ArrayList<>();
+    for (Coach coach : coachCounters.keySet()) {
+        result.add(new CounterOfTrainings(coach, coachCounters.get(coach)));
+    }
 
-        Collections.sort(result, new Comparator<Map.Entry<Coach, Integer>>() {
-            @Override
-            public int compare(Map.Entry<Coach, Integer> e1, Map.Entry<Coach, Integer> e2) {
-                return e2.getValue().compareTo(e1.getValue());
-            }
-        }
-        );
+    Collections.sort(result);
 
-        return result;
+    return result;
     }
 }
